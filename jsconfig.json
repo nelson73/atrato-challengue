@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "baseUrl": "./src",
+      "target": "ES2020",
+      "allowJs": true,
+      "allowSyntheticDefaultImports": true,
+      "moduleResolution": "node",
+      "checkJs": true,
+      "jsx": "react-jsx"
+    },
+    "include": [
+      "src"
+    ]
+  }

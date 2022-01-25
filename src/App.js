@@ -1,23 +1,35 @@
-import logo from './logo.svg';
 import './App.css';
+import "antd/dist/antd.css";
+import "antd/lib/style/themes/default.less"
+import {
+  BrowserRouter as Router,
+  useRoutes,
+} from "react-router-dom";
+import { routes } from 'utils/routes';
+import { UsersPage } from 'pages/UsersPage';
+import { MainRoute } from 'components/organims/Layout/MainRoute';
+import { UserEditPage } from 'pages/UserEditPage';
+
+const { home, users, userEdit } = routes
+
+const Home = <MainRoute page={<UsersPage />} />
+const UserEdit = <MainRoute page={<UserEditPage />} />
+
+const Routes = () => {
+  let routes = useRoutes([
+    { path: home, element: Home },
+    { path: users, element: Home },
+    { path: userEdit(":user_id"), element: UserEdit },
+  ]);
+  return routes;
+}
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Routes />
+      </Router>
     </div>
   );
 }
