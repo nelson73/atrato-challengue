@@ -8,18 +8,21 @@ import {
 import { routes } from 'utils/routes';
 import { UsersPage } from 'pages/UsersPage';
 import { MainRoute } from 'components/organims/Layout/MainRoute';
-import { UserEditPage } from 'pages/UserEditPage';
+import { UserPage } from 'pages/UserPage';
 
-const { home, users, userEdit } = routes
+const { home, users, userAdd, userEdit } = routes
 
 const Home = <MainRoute page={<UsersPage />} />
-const UserEdit = <MainRoute page={<UserEditPage />} />
+const UserEdit = <MainRoute page={<UserPage />} />
+const UserAdd = <MainRoute page={<UserPage isAdd={true} />} />
 
 const Routes = () => {
   let routes = useRoutes([
     { path: home, element: Home },
     { path: users, element: Home },
+    { path: userAdd, element: UserAdd },
     { path: userEdit(":user_id"), element: UserEdit },
+
   ]);
   return routes;
 }
