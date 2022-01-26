@@ -11,7 +11,7 @@ export const AppTable = ({ columns, data, loading = false }) => {
       columns={columns}
       dataSource={dataSource}
       loading={loading}
-      scroll={{ y: "60em", x: "40em" }}
+      scroll={{ x: "60em" }}
     />
   );
 };

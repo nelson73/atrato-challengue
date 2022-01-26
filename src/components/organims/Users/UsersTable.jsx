@@ -19,29 +19,42 @@ const MenuItem = styled(Menu.Item)`
 const getColumns = ({ onEdit = () => {}, onDelete = () => {} }) => {
   return [
     {
-      title: "Nombre completo",
+      title: "ID",
+      dataIndex: "id",
+      key: "id",
+      width: 70,
+    },
+    {
+      title: "NOMBRE COMPLETO",
       dataIndex: "full_name",
       key: "full_name",
     },
     {
-      title: "Email",
+      title: "EMAIL",
       dataIndex: "email",
       key: "email",
     },
     {
-      title: "Analista",
-      dataIndex: "analyst_name",
-      key: "analyst_name",
+      title: "TELÉFONO",
+      dataIndex: "phone",
+      key: "phone",
     },
     {
-      title: "Estatus",
+      title: "ESTATUS",
       dataIndex: "status",
       key: "status",
     },
     {
-      title: "",
+      title: "ANALISTA",
+      dataIndex: "analyst_name",
+      key: "analyst_name",
+    },
+    {
+      title: "OPCIONES",
       dataIndex: "id",
       key: "id",
+      fixed: "right",
+      width: 110,
       render: (id) => (
         <MoreOptions>
           <Menu>
