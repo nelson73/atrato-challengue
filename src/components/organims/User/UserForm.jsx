@@ -35,7 +35,7 @@ const ColLeftGray = styled(Col)`
   border-left: 2px solid ${gray};
   padding-left: 2em;
 
-  @media (max-width: 768px) {
+  @media (max-width: 991px) {
     border-left: none;
     padding-left: 0;
   }

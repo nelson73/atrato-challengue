@@ -6,7 +6,7 @@ export const ResponsiveCard = styled(Card)`
   border-radius: 1em;
   margin-bottom: 6em;
 
-  @media (max-width: 768px) {
+  @media (max-width: 991px) {
     padding: 10px;
 
     .ant-card-body {

@@ -15,7 +15,7 @@ const ResponsiveFooter = styled(Footer)`
   color: ${lowGray};
   background: ${lowGray};
 
-  @media (max-width: 768px) {
+  @media (max-width: 991px) {
     font-size: 12px;
     height: 60px;
   }

@@ -15,7 +15,7 @@ const ResponsiveHeader = styled(Header)`
     padding: 0 1.5em;
     width: 100%;
 
-    @media (max-width: 768px) {
+    @media (max-width: 991px) {
       padding: 0 1em;
     }
   }
