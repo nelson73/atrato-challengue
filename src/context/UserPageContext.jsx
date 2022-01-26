@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { createContext, useEffect } from "react";
+import randomCardService from "service/RandomCardService";
+import { fecthNotification } from "utils/fetchNotification";
 
 const DUMMY = {
   id: 1,
@@ -22,24 +24,39 @@ export const UserPageContext = createContext(undefined);
 
 export const UserPageProvider = ({ children, isAdd }) => {
   const [user, setUser] = useState();
+  const [card, setCard] = useState();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (!isAdd) {
-      getUser();
-    }
+    fecthNotification({
+      fetch: loadData,
+      setLoading,
+    });
   }, [isAdd]);
 
-  const getUser = () => {
+  const loadData = async () => {
+    if (isAdd) {
+      await getRandomCard();
+    } else {
+      await getUser();
+    }
+  };
+
+  const getUser = async () => {
     setUser(DUMMY);
   };
 
+  const getRandomCard = async () => {
+    const card = await randomCardService.getCard();
+    setCard(card);
+  };
   const onSubmit = (user, isAdd) => {};
 
   const contextValue = {
     user,
     isAdd,
     loading,
+    card,
     onSubmit,
   };
 

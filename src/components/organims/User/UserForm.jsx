@@ -42,7 +42,13 @@ const ColLeftGray = styled(Col)`
 `;
 
 export const UserForm = () => {
-  const { user, onSubmit, isAdd, loading } = useContext(UserPageContext);
+  const {
+    user,
+    onSubmit,
+    isAdd,
+    loading,
+    card: cardRandom,
+  } = useContext(UserPageContext);
   const [allowEdition, setAllowEdition] = useState(isAdd);
   const titleMainButton = isAdd ? "Crear" : "Editar";
 
@@ -50,10 +56,23 @@ export const UserForm = () => {
     event.preventDefault();
     setAllowEdition(!allowEdition);
   };
-  const birthdate = user?.birthdate ? moment(user.birthdate) : null;
-  const initialValues = { ...user, birthdate, ...user?.card } ?? {};
 
-  if (!user && !isAdd) {
+  const isEnableEditCard = allowEdition && isAdd;
+  const birthdate = user?.birthdate ? moment(user.birthdate) : null;
+  const isFillCard = isAdd && cardRandom;
+  const card = isFillCard
+    ? {
+        full_name: cardRandom.fullName,
+        brand: cardRandom.type,
+        expiration_date: moment(cardRandom.date).format("MM-YY"),
+        card_number: cardRandom.cardNumber,
+        cvv: cardRandom.cvv,
+        pin: cardRandom.pin,
+      }
+    : user?.card;
+  const initialValues = { ...user, birthdate, ...card } ?? {};
+
+  if ((!user && !isAdd) || (isAdd && !card)) {
     return null;
   }
 
@@ -97,7 +116,7 @@ export const UserForm = () => {
         },
       ]
     : [];
-  const rulesCardNumber = allowEdition
+  const rulesCardNumber = isEnableEditCard
     ? [
         {
           required: true,
@@ -105,7 +124,15 @@ export const UserForm = () => {
         },
       ]
     : [];
-  const rulesCvc = allowEdition
+  const rulesBrandNumber = isEnableEditCard
+    ? [
+        {
+          required: true,
+          message: "Proveedor de tarjeta es requerido",
+        },
+      ]
+    : [];
+  const rulesCvc = isEnableEditCard
     ? [
         {
           required: true,
@@ -113,7 +140,7 @@ export const UserForm = () => {
         },
       ]
     : [];
-  const rulesPin = allowEdition
+  const rulesPin = isEnableEditCard
     ? [
         {
           required: true,
@@ -121,7 +148,7 @@ export const UserForm = () => {
         },
       ]
     : [];
-  const rulesExpirationDate = allowEdition
+  const rulesExpirationDate = isEnableEditCard
     ? [
         {
           required: true,
@@ -129,6 +156,7 @@ export const UserForm = () => {
         },
       ]
     : [];
+
   return (
     <Form onFinish={onSubmit} initialValues={initialValues}>
       <Row gutter={[0, 10]} justify="space-between">
@@ -172,24 +200,30 @@ export const UserForm = () => {
             rules={rulesCardNumber}
           >
             <InputEditable
-              allowEdition={allowEdition}
-              disabled={!allowEdition}
+              allowEdition={isEnableEditCard}
+              disabled={!isEnableEditCard}
+            />
+          </FormItem>
+          <FormItem name="brand" label="PROVEEDOR" rules={rulesBrandNumber}>
+            <InputEditable
+              allowEdition={isEnableEditCard}
+              disabled={!isEnableEditCard}
             />
           </FormItem>
           <Row justify="space-between">
             <Col xs={4}>
               <FormItem name="cvv" label="CVV" rules={rulesCvc}>
                 <InputEditable
-                  allowEdition={allowEdition}
-                  disabled={!allowEdition}
+                  allowEdition={isEnableEditCard}
+                  disabled={!isEnableEditCard}
                 />
               </FormItem>
             </Col>
             <Col xs={4}>
               <FormItem name="pin" label="PIN" rules={rulesPin}>
                 <InputEditable
-                  allowEdition={allowEdition}
-                  disabled={!allowEdition}
+                  allowEdition={isEnableEditCard}
+                  disabled={!isEnableEditCard}
                 />
               </FormItem>
             </Col>
@@ -200,8 +234,8 @@ export const UserForm = () => {
                 rules={rulesExpirationDate}
               >
                 <InputEditable
-                  allowEdition={allowEdition}
-                  disabled={!allowEdition}
+                  allowEdition={isEnableEditCard}
+                  disabled={!isEnableEditCard}
                 />
               </FormItem>
             </Col>
