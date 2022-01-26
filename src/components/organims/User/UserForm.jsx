@@ -188,7 +188,11 @@ export const UserForm = () => {
           </FormItem>
         </Col>
         <ColLeftGray xs={24} lg={10}>
-          <FormItem name="full_name" label="FULL NAME" rules={rulesFullName}>
+          <FormItem
+            name="full_name"
+            label="NOMBRE COMPLETO"
+            rules={rulesFullName}
+          >
             <InputEditable
               allowEdition={allowEdition}
               disabled={!allowEdition}
@@ -196,7 +200,7 @@ export const UserForm = () => {
           </FormItem>
           <FormItem
             name="card_number"
-            label="CARD NUMBER"
+            label="NÚMERO DE TARJETA"
             rules={rulesCardNumber}
           >
             <InputEditable
@@ -211,7 +215,7 @@ export const UserForm = () => {
             />
           </FormItem>
           <Row justify="space-between">
-            <Col xs={4}>
+            <Col xs={6}>
               <FormItem name="cvv" label="CVV" rules={rulesCvc}>
                 <InputEditable
                   allowEdition={isEnableEditCard}
@@ -219,7 +223,7 @@ export const UserForm = () => {
                 />
               </FormItem>
             </Col>
-            <Col xs={4}>
+            <Col xs={6}>
               <FormItem name="pin" label="PIN" rules={rulesPin}>
                 <InputEditable
                   allowEdition={isEnableEditCard}
@@ -227,7 +231,7 @@ export const UserForm = () => {
                 />
               </FormItem>
             </Col>
-            <Col xs={4}>
+            <Col xs={6}>
               <FormItem
                 name="expiration_date"
                 label="EXP"

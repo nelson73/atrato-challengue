@@ -19,7 +19,7 @@ const MenuItem = styled(Menu.Item)`
 const getColumns = ({ onEdit = () => {}, onDelete = () => {} }) => {
   return [
     {
-      title: "Full name",
+      title: "Nombre completo",
       dataIndex: "full_name",
       key: "full_name",
     },
@@ -29,12 +29,12 @@ const getColumns = ({ onEdit = () => {}, onDelete = () => {} }) => {
       key: "email",
     },
     {
-      title: "Analist",
+      title: "Analista",
       dataIndex: "analyst_name",
       key: "analyst_name",
     },
     {
-      title: "Status",
+      title: "Estatus",
       dataIndex: "status",
       key: "status",
     },

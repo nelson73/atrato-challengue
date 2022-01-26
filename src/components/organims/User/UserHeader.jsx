@@ -46,7 +46,7 @@ export const UserHeader = () => {
         <Col>
           <Dropdown overlay={menu}>
             <AppButton loading={loading}>
-              Status <DownOutlined />
+              Estatus <DownOutlined />
             </AppButton>
           </Dropdown>
         </Col>
