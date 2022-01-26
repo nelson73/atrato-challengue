@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { UsersPageContext } from "context/UsersPageContext";
 import styled from "styled-components";
 import AppTitle from "components/atoms/AppTitle";
+import { UsersFilter } from "./UsersFilter";
 
 const RowHeader = styled(Row)`
   padding: 1em 0;
@@ -26,6 +27,9 @@ export const UsersPageHeader = () => {
         <AppButton onClick={() => onAdd()}>
           <UserAddOutlined /> Agregar
         </AppButton>
+      </Col>
+      <Col xs={24} style={{ paddingLeft: "1em" }}>
+        <UsersFilter />
       </Col>
     </RowHeader>
   );

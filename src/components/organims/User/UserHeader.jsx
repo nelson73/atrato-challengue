@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { When } from "react-if";
 import styled from "styled-components";
 import { colors } from "utils/colors";
+import { STATUS_OPTIONS } from "utils/const";
 
 const { gray } = colors;
 
@@ -20,9 +21,9 @@ export const UserHeader = () => {
 
   const menu = () => (
     <Menu onClick={(key) => console.log(key)}>
-      <Menu.Item key="PENDIENTE">PENDIENTE</Menu.Item>
-      <Menu.Item key="COMPLETADO">COMPLETADO</Menu.Item>
-      <Menu.Item key="PROCESO">PROCESO</Menu.Item>
+      {STATUS_OPTIONS.map((option) => (
+        <Menu.Item key={option}>{option}</Menu.Item>
+      ))}
     </Menu>
   );
 
