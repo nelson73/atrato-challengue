@@ -1,23 +1,32 @@
 import { Col, Row } from "antd";
-import Title from "antd/lib/typography/Title";
 import { UserAddOutlined } from "@ant-design/icons";
 import AppButton from "components/atoms/AppButton";
 import { useContext } from "react";
 import { UsersPageContext } from "context/UsersPageContext";
+import styled from "styled-components";
+import AppTitle from "components/atoms/AppTitle";
+
+const RowHeader = styled(Row)`
+  padding: 1em 0;
+`;
+
+const TitleHeader = styled(AppTitle)`
+  padding-left: 1em;
+`;
 
 export const UsersPageHeader = () => {
   const { onAdd } = useContext(UsersPageContext);
 
   return (
-    <Row gutter={12} justify="space-between" style={{ padding: "1em 0" }}>
+    <RowHeader gutter={12} justify="space-between">
       <Col>
-        <Title level={3}>Usuarios</Title>
+        <TitleHeader level={3}>Usuarios</TitleHeader>
       </Col>
       <Col>
         <AppButton onClick={() => onAdd()}>
           <UserAddOutlined /> Agregar
         </AppButton>
       </Col>
-    </Row>
+    </RowHeader>
   );
 };

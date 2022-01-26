@@ -5,7 +5,6 @@ import { AppFooter } from "./AppFooter";
 import AppHeader from "./AppHeader";
 
 const { lowGray } = colors;
-const { Content } = Layout;
 
 const ResponsiveLayout = styled(Layout)`
   padding: 1.5em 2em;
@@ -16,13 +15,17 @@ const ResponsiveLayout = styled(Layout)`
   }
 `;
 
+const ContentLayout = styled(Layout)`
+  margin: 0;
+  padding: 0;
+  min-height: 60em;
+`;
+
 const MainLayout = ({ children }) => (
   <>
     <AppHeader />
     <ResponsiveLayout theme="light">
-      <Content style={{ margin: 0, padding: 0, minHeight: "60em" }}>
-        {children}
-      </Content>
+      <ContentLayout>{children}</ContentLayout>
     </ResponsiveLayout>
     <AppFooter />
   </>

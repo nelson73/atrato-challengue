@@ -1,13 +1,14 @@
 import { FormOutlined } from "@ant-design/icons";
 import { Button, Col, Form, Input, Row } from "antd";
 import AppButton from "components/atoms/AppButton";
+import { AppIcon } from "components/atoms/AppIcon";
 import { UserPageContext } from "context/UserPageContext";
 import { useContext, useState } from "react";
 import { Else, If, Then, When } from "react-if";
 import styled from "styled-components";
 import { colors } from "utils/colors";
 
-const { gray, primaryMarineBlue } = colors;
+const { gray } = colors;
 
 const InputEditable = styled(Input)`
   border: ${({ allowEdition = false }) => (allowEdition ? undefined : "none")};
@@ -21,6 +22,16 @@ const FormItem = styled(Form.Item)`
     label {
       color: ${gray};
     }
+  }
+`;
+
+const ColLeftGray = styled(Col)`
+  border-left: 2px solid ${gray};
+  padding-left: 2em;
+
+  @media (max-width: 768px) {
+    border-left: none;
+    padding-left: 0;
   }
 `;
 
@@ -41,7 +52,7 @@ export const UserForm = () => {
 
   return (
     <Form onFinish={onSubmit} initialValues={initialValues}>
-      <Row gutter={[10, 10]} justify="space-between">
+      <Row gutter={[0, 10]} justify="space-between">
         <Col xs={24} lg={12}>
           <FormItem
             name="email"
@@ -107,11 +118,7 @@ export const UserForm = () => {
             />
           </FormItem>
         </Col>
-        <Col
-          xs={0}
-          lg={10}
-          style={{ borderLeft: "2px solid #B3B6B7", paddingLeft: "2em" }}
-        >
+        <ColLeftGray xs={24} lg={10}>
           <FormItem
             name="full_name"
             label="FULL NAME"
@@ -215,7 +222,7 @@ export const UserForm = () => {
               </FormItem>
             </Col>
           </Row>
-        </Col>
+        </ColLeftGray>
         <Col xs={24}>
           <Row justify="end" gutter={8}>
             <If condition={allowEdition}>
@@ -237,7 +244,7 @@ export const UserForm = () => {
                 <Col>
                   <Button
                     type="link"
-                    icon={<FormOutlined style={{ color: primaryMarineBlue }} />}
+                    icon={<AppIcon Icon={FormOutlined} />}
                     onClick={toogleEdition}
                   />
                 </Col>

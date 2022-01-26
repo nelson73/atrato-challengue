@@ -1,18 +1,16 @@
 import { DownOutlined } from "@ant-design/icons";
-import { Col, Dropdown, Menu, Row, Typography } from "antd";
+import { Col, Dropdown, Menu, Row } from "antd";
 import AppButton from "components/atoms/AppButton";
+import AppTitle from "components/atoms/AppTitle";
 import { UserPageContext } from "context/UserPageContext";
 import { useContext } from "react";
 import { When } from "react-if";
 import { colors } from "utils/colors";
 
-const { primaryDarkBlue, gray } = colors;
-
-const { Title } = Typography;
+const { gray } = colors;
 
 export const UserHeader = () => {
   const { user, loading } = useContext(UserPageContext);
-
   const { id, full_name } = user ?? {};
 
   const menu = () => (
@@ -26,17 +24,15 @@ export const UserHeader = () => {
   return (
     <>
       <Col xs={18} lg={16}>
-        <Row align="middle" style={{ textAlign: "initial" }}>
+        <Row align="middle">
           <Col xs={24}>
-            <Title level={4} style={{ color: primaryDarkBlue }}>
-              {user ? full_name : "Nuevo usuario"}
-            </Title>
+            <AppTitle level={4}>{user ? full_name : "Nuevo usuario"}</AppTitle>
           </Col>
           <When condition={!!user}>
             <Col xs={24}>
-              <Title level={5} style={{ color: gray }}>
+              <AppTitle level={5} color={gray}>
                 ID: {id}
-              </Title>
+              </AppTitle>
             </Col>
           </When>
         </Row>

@@ -1,10 +1,22 @@
-import { EyeOutlined } from "@ant-design/icons";
-import { Button } from "antd";
+import { DeleteOutlined, EyeOutlined } from "@ant-design/icons";
+import { Button, Menu, Popconfirm } from "antd";
+import { AppIcon } from "components/atoms/AppIcon";
 import { AppTable } from "components/atoms/AppTable";
+import MoreOptions from "components/molecules/MoreOptions";
 import { UsersPageContext } from "context/UsersPageContext";
 import { useContext } from "react";
+import styled from "styled-components";
+import { colors } from "utils/colors";
 
-const getColumns = ({ onEdit = () => {} }) => {
+const { primaryMarineBlue } = colors;
+
+const MenuItem = styled(Menu.Item)`
+  span {
+    color: ${primaryMarineBlue};
+  }
+`;
+
+const getColumns = ({ onEdit = () => {}, onDelete = () => {} }) => {
   return [
     {
       title: "Full name",
@@ -31,7 +43,34 @@ const getColumns = ({ onEdit = () => {} }) => {
       dataIndex: "id",
       key: "id",
       render: (id) => (
-        <Button onClick={() => onEdit(id)} icon={<EyeOutlined />} />
+        <MoreOptions>
+          <Menu>
+            <MenuItem>
+              <Button
+                type="link"
+                onClick={() => onEdit(id)}
+                icon={<AppIcon Icon={EyeOutlined} />}
+              >
+                Ver
+              </Button>
+            </MenuItem>
+            <MenuItem>
+              <Popconfirm
+                title="¿Segura que deseas eliminar a este usuario?"
+                onConfirm={() => onDelete(id)}
+                okText="Sí"
+                cancelText="No"
+              >
+                <Button
+                  type="link"
+                  icon={<AppIcon Icon={DeleteOutlined} color="red" />}
+                >
+                  Eliminar
+                </Button>
+              </Popconfirm>
+            </MenuItem>
+          </Menu>
+        </MoreOptions>
       ),
     },
   ];
