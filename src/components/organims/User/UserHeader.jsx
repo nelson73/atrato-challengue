@@ -5,9 +5,14 @@ import AppTitle from "components/atoms/AppTitle";
 import { UserPageContext } from "context/UserPageContext";
 import { useContext } from "react";
 import { When } from "react-if";
+import styled from "styled-components";
 import { colors } from "utils/colors";
 
 const { gray } = colors;
+
+const ColTitle = styled(Col)`
+  text-align: start;
+`;
 
 export const UserHeader = () => {
   const { user, loading } = useContext(UserPageContext);
@@ -25,15 +30,15 @@ export const UserHeader = () => {
     <>
       <Col xs={18} lg={16}>
         <Row align="middle">
-          <Col xs={24}>
+          <ColTitle xs={24}>
             <AppTitle level={4}>{user ? full_name : "Nuevo usuario"}</AppTitle>
-          </Col>
+          </ColTitle>
           <When condition={!!user}>
-            <Col xs={24}>
+            <ColTitle xs={24}>
               <AppTitle level={5} color={gray}>
                 ID: {id}
               </AppTitle>
-            </Col>
+            </ColTitle>
           </When>
         </Row>
       </Col>
