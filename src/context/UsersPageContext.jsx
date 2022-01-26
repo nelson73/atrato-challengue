@@ -9,7 +9,7 @@ const DUMMY = [
     email: "email@test.com",
     phone: "9991436349",
     full_name: "Nelson Jhoan Concha Canto",
-    birthdate: "07/03/1991",
+    birthdate: new Date(),
     status: "PENDIENTE",
     analyst_name: "Pedro",
     card: {
@@ -17,7 +17,7 @@ const DUMMY = [
       brand: "",
       cvv: "",
       pin: "",
-      experate_date: "",
+      expiration_date: "",
     },
   },
   {
@@ -25,7 +25,7 @@ const DUMMY = [
     email: "email@test.com",
     phone: "9991436349",
     full_name: "Nelson Jhoan Concha Canto",
-    birthdate: "07/03/1991",
+    birthdate: new Date(),
     status: "COMPLETADO",
     analyst_name: "Pedro",
     card: {
@@ -33,7 +33,7 @@ const DUMMY = [
       brand: "",
       cvv: "",
       pin: "",
-      experate_date: "",
+      expiration_date: "",
     },
   },
   {
@@ -41,7 +41,7 @@ const DUMMY = [
     email: "email@test.com",
     phone: "9991436349",
     full_name: "Nelson Jhoan Concha Canto",
-    birthdate: "07/03/1991",
+    birthdate: new Date(),
     status: "PROCESO",
     analyst_name: "Pedro",
     card: {
@@ -49,7 +49,7 @@ const DUMMY = [
       brand: "",
       cvv: "",
       pin: "",
-      experate_date: "",
+      expiration_date: "",
     },
   },
 ];

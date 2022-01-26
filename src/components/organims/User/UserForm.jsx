@@ -1,12 +1,14 @@
 import { FormOutlined } from "@ant-design/icons";
-import { Button, Col, Form, Input, Row } from "antd";
+import { Button, Col, DatePicker, Form, Input, Row } from "antd";
 import AppButton from "components/atoms/AppButton";
 import { AppIcon } from "components/atoms/AppIcon";
 import { UserPageContext } from "context/UserPageContext";
+import moment from "moment";
 import { useContext, useState } from "react";
 import { Else, If, Then, When } from "react-if";
 import styled from "styled-components";
 import { colors } from "utils/colors";
+import { regExEmail, regExPhone } from "utils/regEx";
 
 const { gray } = colors;
 
@@ -14,6 +16,10 @@ const InputEditable = styled(Input)`
   border: ${({ allowEdition = false }) => (allowEdition ? undefined : "none")};
 `;
 
+const DatePickerEditable = styled(DatePicker)`
+  border: ${({ allowEdition = false }) => (allowEdition ? undefined : "none")};
+  width: 100%;
+`;
 const FormItem = styled(Form.Item)`
   .ant-form-item-label {
     text-align: initial;
@@ -44,71 +50,106 @@ export const UserForm = () => {
     event.preventDefault();
     setAllowEdition(!allowEdition);
   };
+  const birthdate = user?.birthdate ? moment(user.birthdate) : null;
+  const initialValues = { ...user, birthdate, ...user?.card } ?? {};
 
-  const initialValues = { ...user, ...user?.card } ?? {};
   if (!user && !isAdd) {
     return null;
   }
 
+  const rulesEmail = allowEdition
+    ? [
+        {
+          pattern: regExEmail,
+          message: "Formato incorrecto",
+        },
+        {
+          required: true,
+          message: "Email es requerido",
+        },
+      ]
+    : [];
+  const rulesPhone = allowEdition
+    ? [
+        {
+          pattern: regExPhone,
+          message: "Formato incorrecto",
+        },
+        {
+          required: true,
+          message: "Teléfono es requerido",
+        },
+      ]
+    : [];
+  const rulesBirthdate = allowEdition
+    ? [
+        {
+          required: true,
+          message: "Cumpleaños es requerido",
+        },
+      ]
+    : [];
+  const rulesFullName = allowEdition
+    ? [
+        {
+          required: true,
+          message: "Nombre es requerido",
+        },
+      ]
+    : [];
+  const rulesCardNumber = allowEdition
+    ? [
+        {
+          required: true,
+          message: "Tarjeta es requerido",
+        },
+      ]
+    : [];
+  const rulesCvc = allowEdition
+    ? [
+        {
+          required: true,
+          message: "CVV es requerido",
+        },
+      ]
+    : [];
+  const rulesPin = allowEdition
+    ? [
+        {
+          required: true,
+          message: "PIN es requerido",
+        },
+      ]
+    : [];
+  const rulesExpirationDate = allowEdition
+    ? [
+        {
+          required: true,
+          message: "EXP es requerido",
+        },
+      ]
+    : [];
   return (
     <Form onFinish={onSubmit} initialValues={initialValues}>
       <Row gutter={[0, 10]} justify="space-between">
         <Col xs={24} lg={12}>
-          <FormItem
-            name="email"
-            label="EMAIL"
-            rules={
-              allowEdition
-                ? [
-                    {
-                      required: true,
-                      message: "Email es requerido",
-                    },
-                  ]
-                : []
-            }
-          >
+          <FormItem name="email" label="EMAIL" rules={rulesEmail}>
             <InputEditable
               allowEdition={allowEdition}
               disabled={!allowEdition}
             />
           </FormItem>
-          <FormItem
-            name="phone"
-            label="TELÉFONO"
-            rules={
-              allowEdition
-                ? [
-                    {
-                      required: true,
-                      message: "Teléfono es requerido",
-                    },
-                  ]
-                : []
-            }
-          >
+          <FormItem name="phone" label="TELÉFONO" rules={rulesPhone}>
             <InputEditable
               allowEdition={allowEdition}
               disabled={!allowEdition}
             />
           </FormItem>
-          <FormItem
-            name="birthdate"
-            label="CUMPLEAÑOS"
-            rules={
-              allowEdition
-                ? [
-                    {
-                      required: true,
-                      message: "Cumpleaños es requerido",
-                    },
-                  ]
-                : []
-            }
-          >
-            <InputEditable
+          <FormItem name="birthdate" label="CUMPLEAÑOS" rules={rulesBirthdate}>
+            <DatePickerEditable
               allowEdition={allowEdition}
               disabled={!allowEdition}
+              placeholder=""
             />
           </FormItem>
           <FormItem name="analyst_name" label="ANALISTA">
@@ -119,20 +160,7 @@ export const UserForm = () => {
           </FormItem>
         </Col>
         <ColLeftGray xs={24} lg={10}>
-          <FormItem
-            name="full_name"
-            label="FULL NAME"
-            rules={
-              allowEdition
-                ? [
-                    {
-                      required: true,
-                      message: "Nombre es requerido",
-                    },
-                  ]
-                : []
-            }
-          >
+          <FormItem name="full_name" label="FULL NAME" rules={rulesFullName}>
             <InputEditable
               allowEdition={allowEdition}
               disabled={!allowEdition}
@@ -141,16 +169,7 @@ export const UserForm = () => {
           <FormItem
             name="card_number"
             label="CARD NUMBER"
-            rules={
-              allowEdition
-                ? [
-                    {
-                      required: true,
-                      message: "Tarjeta es requerido",
-                    },
-                  ]
-                : []
-            }
+            rules={rulesCardNumber}
           >
             <InputEditable
               allowEdition={allowEdition}
@@ -159,20 +178,15 @@ export const UserForm = () => {
           </FormItem>
           <Row justify="space-between">
             <Col xs={4}>
-              <FormItem
-                name="cvv"
-                label="CVV"
-                rules={
-                  allowEdition
-                    ? [
-                        {
-                          required: true,
-                          message: "CVV es requerido",
-                        },
-                      ]
-                    : []
-                }
-              >
+              <FormItem name="cvv" label="CVV" rules={rulesCvc}>
+                <InputEditable
+                  allowEdition={allowEdition}
+                  disabled={!allowEdition}
+                />
+              </FormItem>
+            </Col>
+            <Col xs={4}>
+              <FormItem name="pin" label="PIN" rules={rulesPin}>
                 <InputEditable
                   allowEdition={allowEdition}
                   disabled={!allowEdition}
@@ -181,39 +195,9 @@ export const UserForm = () => {
             </Col>
             <Col xs={4}>
               <FormItem
-                name="pin"
-                label="PIN"
-                rules={
-                  allowEdition
-                    ? [
-                        {
-                          required: true,
-                          message: "PIN es requerido",
-                        },
-                      ]
-                    : []
-                }
-              >
-                <InputEditable
-                  allowEdition={allowEdition}
-                  disabled={!allowEdition}
-                />
-              </FormItem>
-            </Col>
-            <Col xs={4}>
-              <FormItem
-                name="experate_date"
+                name="expiration_date"
                 label="EXP"
-                rules={
-                  allowEdition
-                    ? [
-                        {
-                          required: true,
-                          message: "EXP es requerido",
-                        },
-                      ]
-                    : []
-                }
+                rules={rulesExpirationDate}
               >
                 <InputEditable
                   allowEdition={allowEdition}
