@@ -1,7 +1,6 @@
 import { Table } from "antd";
-import React from "react";
 
-export const AppTable = ({ columns, data }) => {
+export const AppTable = ({ columns, data, loading = false }) => {
   const dataSource = data.map(({ id, ...object }) => ({
     key: id,
     id,
@@ -11,6 +10,7 @@ export const AppTable = ({ columns, data }) => {
     <Table
       columns={columns}
       dataSource={dataSource}
+      loading={loading}
       scroll={{ y: "60em", x: "40em" }}
     />
   );

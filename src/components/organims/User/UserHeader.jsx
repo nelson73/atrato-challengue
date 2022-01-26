@@ -1,6 +1,8 @@
 import { DownOutlined } from "@ant-design/icons";
 import { Col, Dropdown, Menu, Row, Typography } from "antd";
 import AppButton from "components/atoms/AppButton";
+import { UserPageContext } from "context/UserPageContext";
+import { useContext } from "react";
 import { When } from "react-if";
 import { colors } from "utils/colors";
 
@@ -8,7 +10,9 @@ const { primaryDarkBlue, gray } = colors;
 
 const { Title } = Typography;
 
-export const UserHeader = ({ user }) => {
+export const UserHeader = () => {
+  const { user, loading } = useContext(UserPageContext);
+
   const { id, full_name } = user ?? {};
 
   const menu = () => (
@@ -40,7 +44,7 @@ export const UserHeader = ({ user }) => {
       <When condition={!!user}>
         <Col>
           <Dropdown overlay={menu}>
-            <AppButton>
+            <AppButton loading={loading}>
               Status <DownOutlined />
             </AppButton>
           </Dropdown>

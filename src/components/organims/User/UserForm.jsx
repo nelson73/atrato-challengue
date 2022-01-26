@@ -1,7 +1,8 @@
 import { FormOutlined } from "@ant-design/icons";
 import { Button, Col, Form, Input, Row } from "antd";
 import AppButton from "components/atoms/AppButton";
-import { useState } from "react";
+import { UserPageContext } from "context/UserPageContext";
+import { useContext, useState } from "react";
 import { Else, If, Then, When } from "react-if";
 import styled from "styled-components";
 import { colors } from "utils/colors";
@@ -23,7 +24,8 @@ const FormItem = styled(Form.Item)`
   }
 `;
 
-export const UserForm = ({ onSubmit = () => {}, user, isAdd }) => {
+export const UserForm = () => {
+  const { user, onSubmit, isAdd, loading } = useContext(UserPageContext);
   const [allowEdition, setAllowEdition] = useState(isAdd);
   const titleMainButton = isAdd ? "Crear" : "Editar";
 
@@ -226,7 +228,9 @@ export const UserForm = ({ onSubmit = () => {}, user, isAdd }) => {
                   </Col>
                 </When>
                 <Col>
-                  <AppButton>{titleMainButton}</AppButton>
+                  <AppButton loading={loading} htmlType="submit">
+                    {titleMainButton}
+                  </AppButton>
                 </Col>
               </Then>
               <Else>
