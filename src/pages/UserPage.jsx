@@ -1,6 +1,7 @@
 import { UserOutlined } from "@ant-design/icons";
 import { Avatar, Col, Row } from "antd";
 import { ResponsiveCard } from "components/atoms/ResponsiveCard";
+import { BackButton } from "components/molecules/BackButton";
 import { UserForm } from "components/organims/User/UserForm";
 import { UserHeader } from "components/organims/User/UserHeader";
 import { UserPageProvider } from "context/UserPageContext";
@@ -16,6 +17,7 @@ const ColAvatar = styled(Col)`
 
 export const UserPage = ({ isAdd = false }) => (
   <UserPageProvider isAdd={isAdd}>
+    <BackButton />
     <ResponsiveCard>
       <RowUserPage justify="center">
         <ColAvatar xs={0} md={3} lg={2}>

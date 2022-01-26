@@ -19,6 +19,7 @@ const ContentLayout = styled(Layout)`
   margin: 0;
   padding: 0;
   min-height: 60em;
+  background: ${lowGray};
 `;
 
 const MainLayout = ({ children }) => (
